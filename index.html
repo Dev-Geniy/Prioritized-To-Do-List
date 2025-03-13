@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prioritized To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <button id="theme-toggle" aria-label="Toggle Theme">
+            <span class="icon">☀️</span>
+        </button>
+    </header>
+    <main class="container">
+        <h1>Prioritized To-Do List</h1>
+        <p>Add tasks with priorities and let us sort them for you. Stay organized!</p>
+        
+        <div class="todo-list">
+            <div class="form-group">
+                <div class="task-input-wrapper">
+                    <input type="text" id="task-input" placeholder="e.g., Finish report" required>
+                    <div class="priority-dropdown">
+                        <button id="priority-btn" class="priority-btn" data-priority="medium">M</button>
+                        <ul id="priority-menu" class="priority-menu">
+                            <li data-value="high">High</li>
+                            <li data-value="medium">Medium</li>
+                            <li data-value="low">Low</li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="add-task" class="add-btn">Add Task</button>
+            </div>
+            <div class="task-list">
+                <ul id="tasks"></ul>
+            </div>
+        </div>
+        
+        <p>Want to see the code? Check it out on GitHub: <a href="https://github.com/Dev-Geniy/Prioritized-To-Do-List" target="_blank">https://github.com/Dev-Geniy/Prioritized-To-Do-List</a></p>
+        <p class="note">Note: Replace the link above with your own GitHub repository URL in the HTML file (search for "https://github.com/Dev-Geniy/Prioritized-To-Do-List").</p>
+    </main>
+    
+    <footer class="footer">
+        <div class="social">
+            <img src="https://cdn3d.iconscout.com/3d/free/thumb/free-twitter-x-3d-icon-download-in-png-blend-fbx-gltf-file-formats--logo-network-social-media-pack-logos-icons-8050016.png?f=webp" alt="Twitter Icon" class="twitter-icon">
+            <div>
+                <a href="https://twitter.com/HotDog850642" target="_blank">@HotDog850642</a>
+                <p>I'm a code developer. Feel free to reach out!</p>
+            </div>
+        </div>
+        <div class="donation">
+            <h3>For voluntary donations</h3>
+            <div class="btc-address">
+                <span id="btc-code">bc1q3r5gad7dxc276ael06n02gek7ncm536hpndgmq</span>
+                <button class="copy-btn" data-target="btc-code">Copy</button>
+            </div>
+            <p class="thanks">Thank you for your support!</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
