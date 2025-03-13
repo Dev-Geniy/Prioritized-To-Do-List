@@ -1,0 +1,478 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --button-bg: #007bff;
+    --code-bg: #f5f5f5;
+    --code-border: #ddd;
+    --high-priority: rgba(255, 68, 68, 0.2); /* Лёгкий красный */
+    --medium-priority: rgba(255, 187, 51, 0.2); /* Лёгкий оранжевый */
+    --low-priority: rgba(255, 255, 102, 0.2); /* Лёгкий жёлтый */
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --button-bg: #ff4444;
+    --code-bg: #2b2b2b;
+    --code-border: #444;
+    --high-priority: rgba(255, 102, 102, 0.2);
+    --medium-priority: rgba(255, 204, 102, 0.2);
+    --low-priority: rgba(204, 255, 102, 0.2);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    position: relative;
+    padding: 15px;
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+#theme-toggle:hover {
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    flex: 1;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+a {
+    color: var(--button-bg);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.note {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+[data-theme="dark"] .note {
+    color: #aaa;
+}
+
+/* To-Do List Styles */
+.todo-list {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.task-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#task-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid var(--code-border);
+    border-radius: 4px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+    padding-right: 40px; /* Место для кнопки приоритета */
+}
+
+.priority-dropdown {
+    position: absolute;
+    right: 8px;
+}
+
+.priority-btn {
+    width: 24px;
+    height: 24px;
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.priority-btn:hover {
+    opacity: 0.9;
+}
+
+.priority-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 28px;
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 4px;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    z-index: 10;
+}
+
+.priority-menu li {
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.priority-menu li:hover {
+    background: var(--button-bg);
+    color: white;
+}
+
+.add-btn {
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.add-btn:hover {
+    opacity: 0.9;
+}
+
+.task-list {
+    margin-top: 15px;
+}
+
+#tasks {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid var(--code-border);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: opacity 0.3s;
+}
+
+.task-item.high {
+    background: var(--high-priority);
+}
+
+.task-item.medium {
+    background: var(--medium-priority);
+}
+
+.task-item.low {
+    background: var(--low-priority);
+}
+
+.task-item.completed {
+    opacity: 0.3;
+}
+
+.task-item.completed span {
+    text-decoration: line-through;
+}
+
+.task-item span {
+    flex: 1;
+    text-align: left;
+    word-break: break-word;
+    margin-left: 10px;
+}
+
+/* Тумблер */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--button-bg);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.task-item button {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.task-item button:hover {
+    opacity: 0.9;
+}
+
+/* Footer styles */
+.footer {
+    background: var(--code-bg);
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid var(--code-border);
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.twitter-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.social a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.social a:hover {
+    text-decoration: underline;
+}
+
+.social p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+}
+
+.donation {
+    margin-top: 15px;
+}
+
+.donation h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.btc-address {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#btc-code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    background: var(--bg-color);
+    padding: 4px 8px;
+    border: 1px solid var(--code-border);
+    border-radius: 4px;
+    word-break: break-all;
+    max-width: 100%;
+}
+
+.copy-btn {
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+}
+
+.copy-btn:hover {
+    opacity: 0.9;
+}
+
+.thanks {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .todo-list {
+        padding: 15px;
+    }
+
+    #theme-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 6px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    #task-input {
+        font-size: 0.9rem;
+        padding: 6px;
+    }
+
+    .priority-btn {
+        width: 20px;
+        height: 20px;
+        font-size: 0.8rem;
+    }
+
+    .priority-menu {
+        top: 24px;
+    }
+
+    .add-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+    }
+
+    .task-item span {
+        margin-bottom: 5px;
+    }
+
+    .task-item button {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+
+    .social {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .twitter-icon {
+        margin-bottom: 5px;
+    }
+
+    .donation h3 {
+        font-size: 1.1rem;
+    }
+
+    #btc-code {
+        font-size: 0.8rem;
+    }
+
+    .copy-btn {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
